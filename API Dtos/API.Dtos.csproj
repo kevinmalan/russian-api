@@ -2,13 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>API_Dtos</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\API Dtos\API.Dtos.csproj" />
-    <ProjectReference Include="..\EF\EF.csproj" />
-  </ItemGroup>
 
 </Project>

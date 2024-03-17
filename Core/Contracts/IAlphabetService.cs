@@ -1,9 +1,7 @@
-﻿using Core.Models;
-
-namespace Core.Contracts
+﻿namespace Core.Contracts
 {
     public interface IAlphabetService
     {
-        Task<List<Alphabet>> GetAsync();
+        Task<List<API.Dtos.Alphabet>> GetAsync();
     }
 }

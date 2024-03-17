@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\API.Dtos\API.Dtos.csproj" />
     <ProjectReference Include="..\Core\Core.csproj" />
   </ItemGroup>
 

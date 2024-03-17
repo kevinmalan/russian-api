@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Models", "Core.Models\Core.Models.csproj", "{43484A10-5EA4-4280-A6FC-A94915C2524F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Dtos", "API Dtos\API.Dtos.csproj", "{D7B0F57F-8BAC-4DBC-A59F-AB1C7B8F73A8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Dtos", "API.Dtos\API.Dtos.csproj", "{D7B0F57F-8BAC-4DBC-A59F-AB1C7B8F73A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

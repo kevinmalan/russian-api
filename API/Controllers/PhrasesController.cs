@@ -1,16 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Core.Contracts;
+using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    public class PhrasesController : BaseController
+    public class PhrasesController(IPhraseService phraseService) : BaseController
     {
         [HttpGet]
         public async Task<IActionResult> GetAsync()
         {
-            return Ok(new
-            {
-                Todo = true
-            });
+            var result = await phraseService.GetAsync();
+
+            return Ok(result);
         }
     }
 }

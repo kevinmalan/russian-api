@@ -66,5 +66,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="dbo\Scripts\Seed_Alphabet.sql" />
+    <None Include="dbo\Scripts\Seed_Phrases.sql" />
   </ItemGroup>
 </Project>

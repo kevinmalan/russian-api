@@ -10,6 +10,7 @@ namespace Core
         public static void RegisterCoreServices(IServiceCollection services, IConfiguration config)
         {
             services.AddTransient<IAlphabetService, AlphabetService>();
+            services.AddTransient<IPhraseService, PhraseService>();
         }
     }
 }

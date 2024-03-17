@@ -12,6 +12,7 @@ namespace EF
         {
             services.AddDbContext<DataContext>(options => options.UseSqlServer(config.GetSection("SQLServer:Connectionstring").Value), ServiceLifetime.Transient);
             services.AddTransient<IAlphabetQueryService, AlphabetQueryService>();
+            services.AddTransient<IPhraseQueryService, PhraseQueryService>();
         }
     }
 }

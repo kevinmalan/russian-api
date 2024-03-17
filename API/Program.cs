@@ -1,3 +1,5 @@
+using static Core.DependencyInjection;
+using static EF.DependencyInjection;
 
 namespace API
 {
@@ -7,12 +9,11 @@ namespace API
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            RegisterEFServices(builder.Services, builder.Configuration);
+            RegisterCoreServices(builder.Services, builder.Configuration);
 
             var app = builder.Build();
 
@@ -26,7 +27,6 @@ namespace API
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 

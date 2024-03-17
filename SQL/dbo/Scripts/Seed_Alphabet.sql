@@ -1,0 +1,38 @@
+﻿INSERT INTO [dbo].[Alphabet]
+           ([Russian]
+           ,[English]
+           ,[Examples])
+VALUES
+           (N'А', 'A', 'ah,father'),
+		   (N'Б', 'B', 'bed,banana'),
+		   (N'В', 'V', 'veh,vah-dah'),
+		   (N'Г', 'G', 'geh'),
+		   (N'Д', 'D', 'dohm'),
+		   (N'Е', 'YE', 'yes,yel'),
+		   (N'Ё', 'YO', 'yo,yogurt'),
+		   (N'Ж', 'ZH', 'pleasure,measure'),
+		   (N'З', 'Z', 'zebra'),
+		   (N'И', 'I', 'ee,see'),
+		   (N'Й', 'Y', 'boy,yogurt'),
+		   (N'К', 'К', 'kite'),
+		   (N'Л', 'L', 'love'),
+		   (N'М', 'М', 'mama'),
+		   (N'Н', 'N', 'nice'),
+		   (N'О', 'О', 'go'),
+		   (N'П', 'P', 'pen'),
+		   (N'Р', 'R', 'rye'),
+		   (N'С', 'S', 'sun'),
+		   (N'Т', 'Т', 'tor'),
+		   (N'У', 'U', 'oo,soon'),
+		   (N'Ф', 'F', 'find'),
+		   (N'Х', 'KH', 'khak,loch'),
+		   (N'Ц', 'TS', 'tseh,hats'),
+		   (N'Ч', 'CH', 'church'),
+		   (N'Ш', 'SH', 'shoe'),
+		   (N'Щ', 'SHCH', 'shoe (but softer)'),
+		   (N'Ъ', '', 'Hard sign that doesnt have a sound of its own but affects the preceding consonant'),
+		   (N'Ь', '', 'Soft sign that also affects the preceding consonant and making it soft'),
+		   (N'Ы', 'Y', 'mixture of ih and ee'),
+		   (N'Э', 'E', 'eh,met'),
+		   (N'Ю', 'YU', 'yoo,you'),
+		   (N'Я', 'YA', 'ya,yard');

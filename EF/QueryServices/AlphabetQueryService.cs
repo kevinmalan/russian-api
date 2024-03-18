@@ -1,16 +1,14 @@
 ﻿using EF.Contracts;
+using EF.Entities;
 using Microsoft.EntityFrameworkCore;
-using static EF.Mappers.AlphabetMapper;
 
 namespace EF.QueryServices
 {
     public class AlphabetQueryService(DataContext dataContext) : IAlphabetQueryService
     {
-        public async Task<List<Core.Models.Alphabet>> GetAsync()
+        public async Task<List<Alphabet>> GetAsync()
         {
-            var entities = await dataContext.Alphabet.ToListAsync();
-
-            return entities.Select(x => x.MapToModel()).ToList();
+            return await dataContext.Alphabet.ToListAsync();
         }
     }
 }

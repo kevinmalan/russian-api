@@ -1,27 +1,34 @@
 ﻿using Core.Contracts;
+using Core.Models;
 using EF.Contracts;
 using System.Text;
+using static Core.Mappers.AlphabetMapper;
+using static Core.Mappers.PhraseMapper;
 
 namespace Core.Services
 {
     public class PhraseService(IPhraseQueryService phraseQueryService, IAlphabetQueryService alphabetQueryService) : IPhraseService
     {
-        public async Task<List<API.Dtos.Phrase>> GetAsync()
+        public async Task<List<Phrase>> GetAsync()
         {
-            var phraseModels = await phraseQueryService.GetAsync();
-            var alphabetModels = await alphabetQueryService.GetAsync();
+            // Entities
+            var alphabetEntities = await alphabetQueryService.GetAsync();
+            var phraseEntities = await phraseQueryService.GetAsync();
 
-            return phraseModels.Select(x => new API.Dtos.Phrase
+            // Models
+            var alphabetModels = alphabetEntities.Select(x => x.MapToModel()).ToList();
+            var phraseModels = phraseEntities.Select(x => x.MapToModel()).ToList();
+
+
+            foreach (var phraseModel in phraseModels)
             {
-                Category = x.Category,
-                English = x.English,
-                Russian = x.Russian,
-                UniqueId = x.UniqueId,
-                NonCyrillicRussian = GetNonCyrillicRussian(x?.Russian ?? "", alphabetModels)
-            }).ToList();
+                phraseModel.NonCyrillicRussian = GetNonCyrillicRussian(phraseModel.Russian ?? "", alphabetModels);
+            }
+
+            return phraseModels;
         }
 
-        private static string GetNonCyrillicRussian(string cyrillicRussianPhrase, List<Models.Alphabet> alphabet)
+        private static string GetNonCyrillicRussian(string cyrillicRussianPhrase, List<Alphabet> alphabet)
         {
             var sb = new StringBuilder();
             foreach (var letter in cyrillicRussianPhrase)

@@ -4,14 +4,14 @@ namespace Core.Mappers
 {
     public static class AlphabetMapper
     {
-        public static API.Dtos.Alphabet MapToDto(this Alphabet model)
+        public static Alphabet MapToModel(this EF.Entities.Alphabet entity)
         {
-            return new API.Dtos.Alphabet
+            return new Alphabet
             {
-                UniqueId = model.UniqueId,
-                English = model.English,
-                Russian = model.Russian,
-                Examples = model.Examples?.Split(",")
+                UniqueId = entity.UniqueId,
+                English = entity.English,
+                Russian = entity.Russian,
+                Examples = entity.Examples
             };
         }
     }

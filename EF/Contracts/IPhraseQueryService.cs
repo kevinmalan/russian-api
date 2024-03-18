@@ -1,7 +1,9 @@
-﻿namespace EF.Contracts
+﻿using EF.Entities;
+
+namespace EF.Contracts
 {
     public interface IPhraseQueryService
     {
-        Task<List<Core.Models.Phrase>> GetAsync();
+        Task<List<Phrase>> GetAsync();
     }
 }

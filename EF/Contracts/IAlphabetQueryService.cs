@@ -1,7 +1,9 @@
-﻿namespace EF.Contracts
+﻿using EF.Entities;
+
+namespace EF.Contracts
 {
     public interface IAlphabetQueryService
     {
-        Task<List<Core.Models.Alphabet>> GetAsync();
+        Task<List<Alphabet>> GetAsync();
     }
 }

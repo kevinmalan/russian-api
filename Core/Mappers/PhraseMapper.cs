@@ -1,10 +1,12 @@
-﻿namespace EF.Mappers
+﻿using Core.Models;
+
+namespace Core.Mappers
 {
     public static class PhraseMapper
     {
-        public static Core.Models.Phrase MapToModel(this Entities.Phrase entity)
+        public static Phrase MapToModel(this EF.Entities.Phrase entity)
         {
-            return new Core.Models.Phrase
+            return new Phrase
             {
                 English = entity.English,
                 Russian = entity.Russian,

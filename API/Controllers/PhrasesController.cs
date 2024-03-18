@@ -1,5 +1,6 @@
 ﻿using Core.Contracts;
 using Microsoft.AspNetCore.Mvc;
+using static API.Mappers.PhraseMapper;
 
 namespace API.Controllers
 {
@@ -8,9 +9,10 @@ namespace API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAsync()
         {
-            var result = await phraseService.GetAsync();
+            var models = await phraseService.GetAsync();
+            var dto = models.Select(x => x.MapToDto());
 
-            return Ok(result);
+            return Ok(dto);
         }
     }
 }

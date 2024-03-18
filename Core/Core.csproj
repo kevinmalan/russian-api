@@ -7,8 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\API.Dtos\API.Dtos.csproj" />
-    <ProjectReference Include="..\API.Dtos\API.Dtos.csproj" />
     <ProjectReference Include="..\EF\EF.csproj" />
   </ItemGroup>
 

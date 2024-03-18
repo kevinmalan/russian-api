@@ -1,17 +1,14 @@
 ﻿using EF.Contracts;
-using EF.Mappers;
+using EF.Entities;
 using Microsoft.EntityFrameworkCore;
-using static EF.Mappers.PhraseMapper;
 
 namespace EF.QueryServices
 {
     public class PhraseQueryService(DataContext dataContext) : IPhraseQueryService
     {
-        public async Task<List<Core.Models.Phrase>> GetAsync()
+        public async Task<List<Phrase>> GetAsync()
         {
-            var entities = await dataContext.Phrases.ToListAsync();
-
-            return entities.Select(x => x.MapToModel()).ToList();
+            return await dataContext.Phrases.ToListAsync();
         }
     }
 }

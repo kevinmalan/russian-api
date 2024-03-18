@@ -1,4 +1,5 @@
 ﻿using Core.Contracts;
+using Core.Models;
 using EF.Contracts;
 using static Core.Mappers.AlphabetMapper;
 
@@ -6,11 +7,11 @@ namespace Core.Services
 {
     public class AlphabetService(IAlphabetQueryService alphabetQueryService) : IAlphabetService
     {
-        public async Task<List<API.Dtos.Alphabet>> GetAsync()
+        public async Task<List<Alphabet>> GetAsync()
         {
-            var models = await alphabetQueryService.GetAsync();
+            var entities = await alphabetQueryService.GetAsync();
 
-            return models.Select(x => x.MapToDto()).ToList();
+            return entities.Select(x => x.MapToModel()).ToList();
         }
     }
 }

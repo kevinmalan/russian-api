@@ -1,0 +1,17 @@
+﻿@page "/alphabet"
+@using UI.Services.Contracts
+@inject IApiService ApiService
+
+<PageTitle>Alphabet</PageTitle>
+
+<h1>Russian Alphabet</h1>
+<h2>@alphabet</h2>
+
+@code {
+    private string alphabet;
+
+    protected override async Task OnInitializedAsync()
+    {
+        alphabet = await ApiService.GetAlphabetAsync();
+    }
+}

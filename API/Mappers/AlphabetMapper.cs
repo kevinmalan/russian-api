@@ -1,4 +1,4 @@
-﻿using API.Dtos;
+﻿using Shared.Dtos;
 
 namespace API.Mappers
 {
@@ -11,7 +11,7 @@ namespace API.Mappers
                 UniqueId = model.UniqueId,
                 English = model.English,
                 Russian = model.Russian,
-                Examples = model.Examples?.Split(",")
+                Examples = model.Examples
             };
         }
     }

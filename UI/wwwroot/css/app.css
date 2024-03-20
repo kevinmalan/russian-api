@@ -101,3 +101,11 @@ a, .btn-link {
 code {
     color: #c02d76;
 }
+
+.russian-heading {
+    font-family: 'Playfair Display', serif;
+}
+
+.nav-bar-colour {
+    background-color: #242222 !important;
+}

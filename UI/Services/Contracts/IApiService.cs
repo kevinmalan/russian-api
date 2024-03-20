@@ -1,7 +1,9 @@
-﻿namespace UI.Services.Contracts
+﻿using Shared.Dtos;
+
+namespace UI.Services.Contracts
 {
     public interface IApiService
     {
-        Task<string> GetAlphabetAsync();
+        Task<List<Alphabet>> GetAlphabetAsync();
     }
 }

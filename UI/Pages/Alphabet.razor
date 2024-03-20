@@ -4,11 +4,33 @@
 
 <PageTitle>Alphabet</PageTitle>
 
-<h1>Russian Alphabet</h1>
-<h2>@alphabet</h2>
+<div class="container">
+    <div class="container mt-1">
+        <h1 class="russian-heading">Русский алфавит</h1>
+    </div>
+    <table class="table table-striped table-dark">
+        <thead>
+            <tr>
+                <th>Russian</th>
+                <th>English</th>
+                <th>Examples</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in alphabet)
+            {
+                <tr>
+                    <td>@item.Russian</td>
+                    <td>@item.English</td>
+                    <td>@item.Examples</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 @code {
-    private string alphabet;
+    private List<Shared.Dtos.Alphabet> alphabet = [];
 
     protected override async Task OnInitializedAsync()
     {

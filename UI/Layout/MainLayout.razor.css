@@ -2,7 +2,9 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    background-image: url('russia-flag.jpg')
+    background-image: url('russia-flag.jpg');
+    background-size: 100% 100%;
+    background-attachment: fixed;
 }
 
 main {

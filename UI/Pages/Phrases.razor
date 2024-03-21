@@ -1,0 +1,40 @@
+﻿@page "/phrases"
+
+<PageTitle>Phrases</PageTitle>
+
+<div class="container">
+    <div class="container mt-1">
+        <h1 class="russian-heading">Русские фразы</h1>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="russian" placeholder="Русский">
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="english" placeholder="English">
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-sm-10">
+            <select class="form-select" id="category">
+                <option value="Common">Common</option>
+                <option value="Uncommon">Uncommon</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-10">
+            <button type="button" class="btn btn-primary">Add</button>
+        </div>
+    </div>
+</div>
+
+@code {
+
+}

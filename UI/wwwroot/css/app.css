@@ -103,9 +103,8 @@ code {
 }
 
 .russian-heading {
+    color: #e2d8d8;
     font-family: 'Playfair Display', serif;
-}
-
-.nav-bar-colour {
-    background-color: #242222 !important;
+    font-weight: bold;
+    margin-bottom: 15pt;
 }

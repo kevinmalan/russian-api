@@ -3,7 +3,8 @@
 	[UniqueId] [uniqueidentifier] NOT NULL,
 	[Russian] [nvarchar](1000) NULL,
 	[English] [nvarchar](1000) NULL,
-	[Category] [nvarchar](50) NULL
+	[Category] [nvarchar](50) NULL,
+	[DateCreatedUtc] [datetime] NOT NULL DEFAULT GETUTCDATE()
 );
 GO
 CREATE INDEX IX_UniqueId

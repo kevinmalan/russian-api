@@ -10,7 +10,7 @@ namespace API.Controllers
         public async Task<IActionResult> GetAsync()
         {
             var models = await phraseService.GetAsync();
-            var dto = models.Select(x => x.MapToDto());
+            var dto = models.Select(x => x.MapToDto()).ToList(); ;
 
             return Ok(dto);
         }

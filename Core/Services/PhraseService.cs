@@ -43,14 +43,15 @@ namespace Core.Services
             foreach (var letter in cyrillicRussianPhrase)
             {
                 // https://en.wikipedia.org/wiki/List_of_Unicode_characters
-                if (letter >= 32 && letter <= 64)
+                // Cyrillic Unicode code point
+                if (letter >= 1024 && letter <= 1279)
                 {
-                    sb.Append(letter);
+                    var item = alphabet.First(x => string.Compare(x.Russian, $"{letter}", ignoreCase: true) != -1);
+                    sb.Append(item.English);
                     continue;
                 }
 
-                var item = alphabet.First(x => string.Compare(x.Russian, $"{letter}", ignoreCase: true) != -1);
-                sb.Append(item.English);
+                sb.Append(letter);
             }
 
             return sb.ToString();

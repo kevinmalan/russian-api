@@ -1,4 +1,5 @@
-﻿using EF.Contracts;
+﻿using EF.CommandServices;
+using EF.Contracts;
 using EF.QueryServices;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -13,6 +14,7 @@ namespace EF
             services.AddDbContext<DataContext>(options => options.UseSqlServer(config.GetSection("SQLServer:Connectionstring").Value), ServiceLifetime.Transient);
             services.AddTransient<IAlphabetQueryService, AlphabetQueryService>();
             services.AddTransient<IPhraseQueryService, PhraseQueryService>();
+            services.AddTransient<IPhraseCommandService, PhraseCommandService>();
         }
     }
 }

@@ -14,5 +14,15 @@ namespace API.Controllers
 
             return Ok(dto);
         }
+
+        [HttpPost]
+        [Route("Create")]
+        public async Task<IActionResult> CreateAsync([FromBody] Shared.Dtos.Phrase request)
+        {
+            var model = request.MapToModel();
+            await phraseService.CreateAsync(model);
+
+            return Ok();
+        }
     }
 }

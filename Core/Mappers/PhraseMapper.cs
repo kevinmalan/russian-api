@@ -14,5 +14,16 @@ namespace Core.Mappers
                 Category = entity.Category
             };
         }
+
+        public static EF.Entities.Phrase MapToEntity(this Phrase model)
+        {
+            return new EF.Entities.Phrase
+            {
+                English = model.English,
+                Russian = model.Russian,
+                UniqueId = model.UniqueId,
+                Category = model.Category
+            };
+        }
     }
 }

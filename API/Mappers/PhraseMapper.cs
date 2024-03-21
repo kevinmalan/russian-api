@@ -15,5 +15,17 @@ namespace API.Mappers
                 NonCyrillicRussian = models.NonCyrillicRussian
             };
         }
+
+        public static Core.Models.Phrase MapToModel(this Phrase dto)
+        {
+            return new Core.Models.Phrase
+            {
+                English = dto.English,
+                Russian = dto.Russian,
+                UniqueId = dto.UniqueId,
+                Category = dto.Category
+            };
+        }
+
     }
 }

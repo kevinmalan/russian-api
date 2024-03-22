@@ -42,7 +42,7 @@ namespace UI.Services
             return result ?? [];
         }
 
-        public async Task CreatePhraseAsync(Phrase phrase)
+        public async Task<Phrase> CreatePhraseAsync(Phrase phrase)
         {
             var uri = new Uri($"{_baseUrl}/{PhraseRoute.Create}");
             var json = JsonConvert.SerializeObject(phrase);
@@ -53,6 +53,11 @@ namespace UI.Services
             {
                 // TODO
             }
+
+            var content = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<Phrase>(content);
+
+            return result;
         }
     }
 }

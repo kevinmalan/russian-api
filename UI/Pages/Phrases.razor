@@ -46,7 +46,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in phrases)
+            @foreach (var item in PhraseState.Value.Phrases)
             {
                 <tr>
                     <td>@item.Russian</td>
@@ -58,49 +58,3 @@
         </tbody>
     </table>
 </div>
-
-@code {
-    private string russianValue = "";
-    private string englishValue = "";
-    private string catergoryValue = "Common";
-
-    private List<Shared.Dtos.Phrase> phrases = [];
-
-    protected override async Task OnInitializedAsync()
-    {
-        phrases = await ApiService.GetPhrasesAsync();
-    }
-
-    private async Task AddAsync()
-    {
-        if (!IsInputValid())
-            return;
-
-        var phrase = new Shared.Dtos.Phrase
-        {
-            Russian = russianValue,
-            English = englishValue,
-            Category = catergoryValue,
-            UniqueId = Guid.NewGuid()
-        };
-        // Send to Fluxor
-        await ApiService.CreatePhraseAsync(phrase);
-        ResetInputValues();
-    }
-
-    private bool IsInputValid()
-    {
-        // TODO: Ensure russianValue is legit Cyrillic text
-        return
-            !string.IsNullOrWhiteSpace(russianValue) &&
-            !string.IsNullOrWhiteSpace(englishValue) &&
-            !string.IsNullOrWhiteSpace(catergoryValue);
-    }
-
-    private void ResetInputValues()
-    {
-        russianValue = "";
-        englishValue = "";
-        catergoryValue = "Common";
-    }
-}

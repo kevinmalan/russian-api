@@ -1,3 +1,4 @@
+using Fluxor;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using UI.Services;
@@ -15,6 +16,8 @@ namespace UI
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
             builder.Services.AddScoped<IApiService, ApiService>();
+            builder.Services.AddFluxor(o => o
+             .ScanAssemblies(typeof(Program).Assembly));
 
             await builder.Build().RunAsync();
         }

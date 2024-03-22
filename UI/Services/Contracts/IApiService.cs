@@ -6,6 +6,6 @@ namespace UI.Services.Contracts
     {
         Task<List<Alphabet>> GetAlphabetAsync();
         Task<List<Phrase>> GetPhrasesAsync();
-        Task CreatePhraseAsync(Phrase phrase);
+        Task<Phrase> CreatePhraseAsync(Phrase phrase);
     }
 }

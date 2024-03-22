@@ -20,9 +20,10 @@ namespace API.Controllers
         public async Task<IActionResult> CreateAsync([FromBody] Shared.Dtos.Phrase request)
         {
             var model = request.MapToModel();
-            await phraseService.CreateAsync(model);
+            var newModel = await phraseService.CreateAsync(model);
+            var dto = newModel.MapToDto();
 
-            return Ok();
+            return Ok(dto);
         }
     }
 }

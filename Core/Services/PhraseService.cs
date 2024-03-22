@@ -14,27 +14,36 @@ namespace Core.Services
     {
         public async Task<List<Phrase>> GetAsync()
         {
-            // Entities
-            var alphabetEntities = await alphabetQueryService.GetAsync();
             var phraseEntities = await phraseQueryService.GetAsync();
-
-            // Models
-            var alphabetModels = alphabetEntities.Select(x => x.MapToModel()).ToList();
             var phraseModels = phraseEntities.Select(x => x.MapToModel()).ToList();
 
 
             foreach (var phraseModel in phraseModels)
             {
-                phraseModel.NonCyrillicRussian = GetNonCyrillicRussian(phraseModel.Russian ?? "", alphabetModels);
+                await AddCalculatedValuesAsync(phraseModel);
             }
 
             return phraseModels;
         }
 
-        public async Task CreateAsync(Phrase phrase)
+        public async Task<Phrase> CreateAsync(Phrase phrase)
         {
             var entity = phrase.MapToEntity();
             await phraseCommandService.CreateAsync(entity);
+
+            await AddCalculatedValuesAsync(phrase);
+
+            return phrase;
+        }
+
+        private async Task<Phrase> AddCalculatedValuesAsync(Phrase model)
+        {
+            var alphabetEntities = await alphabetQueryService.GetAsync();
+            var alphabetModels = alphabetEntities.Select(x => x.MapToModel()).ToList();
+
+            model.NonCyrillicRussian = GetNonCyrillicRussian(model.Russian ?? "", alphabetModels);
+
+            return model;
         }
 
         private static string GetNonCyrillicRussian(string cyrillicRussianPhrase, List<Alphabet> alphabet)

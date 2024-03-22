@@ -4,28 +4,23 @@ namespace API.Mappers
 {
     public static class PhraseMapper
     {
-        public static Phrase MapToDto(this Core.Models.Phrase models)
-        {
-            return new Phrase
+        public static Phrase MapToDto(this Core.Models.Phrase model)
+            => new()
             {
-                English = models.English,
-                Russian = models.Russian,
-                UniqueId = models.UniqueId,
-                Category = models.Category,
-                NonCyrillicRussian = models.NonCyrillicRussian
+                English = model.English,
+                Russian = model.Russian,
+                UniqueId = model.UniqueId,
+                Category = model.Category,
+                NonCyrillicRussian = model.NonCyrillicRussian
             };
-        }
 
         public static Core.Models.Phrase MapToModel(this Phrase dto)
-        {
-            return new Core.Models.Phrase
+            => new()
             {
                 English = dto.English,
                 Russian = dto.Russian,
                 UniqueId = dto.UniqueId,
                 Category = dto.Category
             };
-        }
-
     }
 }

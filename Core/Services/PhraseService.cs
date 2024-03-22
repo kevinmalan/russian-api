@@ -40,21 +40,32 @@ namespace Core.Services
         private static string GetNonCyrillicRussian(string cyrillicRussianPhrase, List<Alphabet> alphabet)
         {
             var sb = new StringBuilder();
-            foreach (var letter in cyrillicRussianPhrase)
+            foreach (var russianChar in cyrillicRussianPhrase)
             {
                 // https://en.wikipedia.org/wiki/List_of_Unicode_characters
                 // Cyrillic Unicode code point
-                if (letter >= 1024 && letter <= 1279)
+                if (russianChar >= 1024 && russianChar <= 1279)
                 {
-                    var item = alphabet.First(x => string.Compare(x.Russian, $"{letter}", ignoreCase: true) != -1);
-                    sb.Append(item.English);
+                    var item = alphabet.First(x => string.Compare(x.Russian, russianChar.ToString(), ignoreCase: true) != -1);
+                    sb.Append(GetCorrectCase(item.English, russianChar));
+
                     continue;
                 }
 
-                sb.Append(letter);
+                sb.Append(russianChar);
             }
 
             return sb.ToString();
         }
+
+        private static string GetCorrectCase(string value, char russian)
+        {
+            var sb = new StringBuilder(value.ToLower());
+            if (!char.IsLower(russian))
+                sb[0] = char.ToUpper(sb[0]);
+
+            return sb.ToString();
+        }
+
     }
 }

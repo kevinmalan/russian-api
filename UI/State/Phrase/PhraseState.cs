@@ -3,7 +3,7 @@
 namespace UI.State.Phrase
 {
     [FeatureState]
-    public class PhraseState
+    public record PhraseState
     {
         public PhraseState()
         { 

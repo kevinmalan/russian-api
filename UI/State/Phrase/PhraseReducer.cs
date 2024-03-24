@@ -1,16 +1,26 @@
 ﻿using Fluxor;
+using UI.State.Phrase.Actions;
 
 namespace UI.State.Phrase
 {
     public static class PhraseReducer
     {
         [ReducerMethod]
-        public static PhraseState ReduceAddPhraseAction(PhraseState state, AddPhraseAction action)
+        public static PhraseState ReduceAddPhraseResultAction(PhraseState state, AddPhraseResultAction action)
         {
-            if (action?.Phrase != null)
-                state.Phrases.Add(action.Phrase);
+            state.Phrases.Add(action.Phrase);
 
-            return state;
+            return new PhraseState
+            {
+                Phrases = state.Phrases
+            };
         }
+
+        [ReducerMethod]
+        public static PhraseState ReduceGetPhrasesResultAction(PhraseState state, GetPhrasesResultAction action)
+         => new()
+         {
+             Phrases = action.Phrases
+         };
     }
 }

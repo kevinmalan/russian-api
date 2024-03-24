@@ -1,17 +1,18 @@
 ﻿using Fluxor;
 using Microsoft.AspNetCore.Components;
 using UI.State.Phrase;
+using UI.State.Phrase.Actions;
 
 namespace UI.Pages
 {
     public partial class Phrases
     {
-        private string russianValue = "";
-        private string englishValue = "";
-        private string catergoryValue = "Common";
+        private string _russianValue = "";
+        private string _englishValue = "";
+        private string _catergoryValue = "Common";
 
         [Inject]
-        private IState<PhraseState> PhraseState { get; set; }
+        private IState<PhraseState>? PhraseState { get; set; }
 
         [Inject]
         public IDispatcher Dispatcher { get; set; }
@@ -19,28 +20,20 @@ namespace UI.Pages
         protected override async Task OnInitializedAsync()
         {
             if (PhraseState.Value.Phrases.Count == 0)
-                PhraseState.Value.Phrases = await ApiService.GetPhrasesAsync();
+                Dispatcher.Dispatch(new GetPhrasesAction());
         }
 
-        private async Task AddAsync()
+        private void Add()
         {
             if (!IsInputValid())
                 return;
 
-            var response = await ApiService.CreatePhraseAsync(new Shared.Dtos.Phrase
+            Dispatcher.Dispatch(new AddPhraseAction
             {
-                Russian = russianValue,
-                English = englishValue,
-                Category = catergoryValue,
-                UniqueId = Guid.NewGuid()
+                RussianValue = _russianValue,
+                EnglishValue = _englishValue,
+                CategoryValue = _catergoryValue
             });
-
-            var action = new AddPhraseAction
-            {
-                Phrase = response
-            };
-
-            Dispatcher.Dispatch(action);
 
             ResetInputValues();
         }
@@ -49,16 +42,16 @@ namespace UI.Pages
         {
             // TODO: Ensure russianValue is legit Cyrillic text
             return
-                !string.IsNullOrWhiteSpace(russianValue) &&
-                !string.IsNullOrWhiteSpace(englishValue) &&
-                !string.IsNullOrWhiteSpace(catergoryValue);
+                !string.IsNullOrWhiteSpace(_russianValue) &&
+                !string.IsNullOrWhiteSpace(_englishValue) &&
+                !string.IsNullOrWhiteSpace(_catergoryValue);
         }
 
         private void ResetInputValues()
         {
-            russianValue = "";
-            englishValue = "";
-            catergoryValue = "Common";
+            _russianValue = "";
+            _englishValue = "";
+            _catergoryValue = "Common";
         }
     }
 }

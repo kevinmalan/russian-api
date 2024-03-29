@@ -1,6 +1,6 @@
 ﻿@page "/alphabet"
 @using UI.Services.Contracts
-@inject IApiService ApiService
+@inherits Fluxor.Blazor.Web.Components.FluxorComponent
 
 <PageTitle>Alphabet</PageTitle>
 
@@ -17,7 +17,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in alphabet)
+            @foreach (var item in AlphabetState.Value.Alphabet)
             {
                 <tr>
                     <td>@item.Russian</td>
@@ -28,12 +28,3 @@
         </tbody>
     </table>
 </div>
-
-@code {
-    private List<Shared.Dtos.Alphabet> alphabet = [];
-
-    protected override async Task OnInitializedAsync()
-    {
-        alphabet = await ApiService.GetAlphabetAsync();
-    }
-}

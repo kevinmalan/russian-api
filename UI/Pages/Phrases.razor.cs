@@ -15,7 +15,7 @@ namespace UI.Pages
         private IState<PhraseState>? PhraseState { get; set; }
 
         [Inject]
-        public IDispatcher Dispatcher { get; set; }
+        private IDispatcher Dispatcher { get; set; }
 
         protected override async Task OnInitializedAsync()
         {

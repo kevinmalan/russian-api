@@ -23,6 +23,11 @@ namespace UI.Pages
                 Dispatcher.Dispatch(new GetPhrasesAction());
         }
 
+        private void Refresh()
+        {
+            Dispatcher.Dispatch(new GetPhrasesAction());
+        }
+
         private void Add()
         {
             if (!IsInputValid())

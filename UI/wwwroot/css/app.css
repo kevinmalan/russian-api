@@ -108,3 +108,7 @@ code {
     font-weight: bold;
     margin-bottom: 15pt;
 }
+
+.refresh-btn {
+    margin-bottom: 5px;
+}

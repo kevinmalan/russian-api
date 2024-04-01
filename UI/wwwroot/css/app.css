@@ -112,3 +112,16 @@ code {
 .refresh-btn {
     margin-bottom: 5px;
 }
+
+.btn-blue {
+    background-color: #163e87;
+    color: #fff;
+}
+
+.btn-white {
+    background-color: #fff;
+}
+
+.btn-red {
+    background-color: #a71717;
+}

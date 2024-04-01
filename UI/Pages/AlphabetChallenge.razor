@@ -2,20 +2,36 @@
 @using UI.Services.Contracts
 @inherits Fluxor.Blazor.Web.Components.FluxorComponent
 
-<h3>AlphabetChallenge</h3>
-
+<div class="container mt-1">
+    <h1 class="russian-heading">тест по алфавиту</h1>
+</div>
 <div class="container mt-5">
     <div class="row">
         <div class="col">
             <h2 class="mb-3">@_challengeLocalState.ChallengeText</h2>
-            <input @bind="_challengeLocalState.ChallengeInputValue" type="text" class="form-control mb-3" placeholder="guess...">
+            <input @bind="_challengeLocalState.ChallengeInputValue" @onkeyup="HandleKeyPress" type="text" class="form-control mb-3" style="width: 15%;" placeholder="guess...">
             <div class="btn-group" role="group" aria-label="Basic example">
-                <button @onclick="GoClicked" type="button" class="btn btn-primary">Go</button>
-                <button type="button" class="btn btn-primary">Next</button>
-                <button type="button" class="btn btn-primary">Reset</button>
+                <button @onclick="GoClicked" type="button" class="btn btn-white">Go</button>
+                <button @onclick="NextClicked" type="button" class="btn btn-blue">Next</button>
+                <button type="button" class="btn btn-red">Reset</button>
             </div>
+            @if (_challengeLocalState.Verdict.HasValue)
+            {
+                @if (_challengeLocalState.Verdict.Value)
+                {
+                    <div class="mt-3">
+                        <label style="color: lime">Correct</label>
+                    </div>
+                }
+                else
+                {
+                    <div class="mt-3">
+                        <label class="text-danger">Wrong</label>
+                    </div>
+                }
+            }
             <div class="mt-3">
-                <label class="text-success">Correct</label>
+                <label style="color: white;">@_challengeLocalState.Message</label>
             </div>
         </div>
     </div>

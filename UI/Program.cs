@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using UI.Services;
 using UI.Services.Contracts;
+using UI.State.Alphabet.Local;
 
 namespace UI
 {
@@ -18,6 +19,9 @@ namespace UI
             builder.Services.AddScoped<IApiService, ApiService>();
             builder.Services.AddFluxor(o => o
              .ScanAssemblies(typeof(Program).Assembly));
+
+            // Local State
+            builder.Services.AddSingleton<ChallengeLocalState>();
 
             await builder.Build().RunAsync();
         }

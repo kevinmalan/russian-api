@@ -7,9 +7,14 @@ namespace UI.State.Alphabet
     {
         [ReducerMethod]
         public static AlphabetState ReduceGetAlphabetResultAction(AlphabetState state, GetAlphabetResultAction action)
-        => new()
         {
-            Alphabet = action.Alphabet
-        };
+            var queue = new Queue<Shared.Dtos.Alphabet>();
+            action.Alphabet.ForEach(x => queue.Enqueue(x));
+            return new AlphabetState
+            {
+                Alphabet = action.Alphabet,
+                AlphabetQueue = queue
+            };
+        }
     }
 }

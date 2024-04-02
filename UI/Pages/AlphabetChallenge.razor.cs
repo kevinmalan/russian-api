@@ -16,7 +16,9 @@ namespace UI.Pages
         private IDispatcher Dispatcher { get; set; }
 
         [Inject]
-        private ChallengeLocalState _challengeLocalState { get; set; }
+        private ChallengeLocalState ChallengeLocalState { get; set; }
+
+
 
         protected override async Task OnInitializedAsync()
         {
@@ -25,8 +27,10 @@ namespace UI.Pages
                 Dispatcher.Dispatch(new GetAlphabetAction());
 
                 AlphabetState.StateChanged += HandleAlphabetStateChanged;
+                return;
             }
-            else if (string.IsNullOrWhiteSpace(_challengeLocalState.ChallengeText))
+
+            if (string.IsNullOrWhiteSpace(ChallengeLocalState.ChallengeText))
             {
                 UpdateChallengeText();
             }
@@ -35,6 +39,8 @@ namespace UI.Pages
         private void HandleAlphabetStateChanged(object sender, object e)
         {
             UpdateChallengeText();
+            ChallengeLocalState.IsChallengeInProgress = true;
+            ChallengeLocalState.IsGoDisabled = false;
             StateHasChanged();
         }
 
@@ -42,7 +48,7 @@ namespace UI.Pages
         {
             if (e.Key == "Enter")
             {
-                if (!string.IsNullOrWhiteSpace(_challengeLocalState.Message))
+                if (!string.IsNullOrWhiteSpace(ChallengeLocalState.Message))
                     NextClicked();
                 else
                     GoClicked();
@@ -51,27 +57,68 @@ namespace UI.Pages
 
         private void GoClicked()
         {
-            var challengeText = _challengeLocalState.ChallengeText;
+            ChallengeLocalState.IsGoDisabled = true;
+            ChallengeLocalState.IsNextDisabled = false;
+            var challengeText = ChallengeLocalState.ChallengeText;
             var challengeEnglish = AlphabetState.Value.Alphabet.First(x => x.Russian == challengeText).English;
-            var challengeInputValie = _challengeLocalState.ChallengeInputValue;
+            var challengeInputValie = ChallengeLocalState.ChallengeInputValue;
             var isCorrect = string.Equals(challengeEnglish, challengeInputValie, StringComparison.OrdinalIgnoreCase);
-            _challengeLocalState.Verdict = isCorrect;
-            _challengeLocalState.Message = $"{challengeText} : {challengeEnglish}";
+            ChallengeLocalState.Verdict = isCorrect;
+            ChallengeLocalState.Message = $"{challengeText} : {challengeEnglish}";
+            UpdateScore(isCorrect);
+        }
+
+        private void UpdateScore(bool isCorrect)
+        {
+            var key = isCorrect ? "Correct" : "Incorrect";
+            ChallengeLocalState.Score[key]++;
         }
 
         private void NextClicked()
         {
-            _challengeLocalState.Verdict = null;
-            _challengeLocalState.Message = string.Empty;
+            ChallengeLocalState.IsGoDisabled = false;
+            ChallengeLocalState.IsNextDisabled = true;
+            ChallengeLocalState.Verdict = null;
+            ChallengeLocalState.Message = string.Empty;
             UpdateChallengeText();
+        }
+
+        private void ResetClicked()
+        {
+            ChallengeLocalState.Verdict = null;
+            ChallengeLocalState.Message = string.Empty;
+            ChallengeLocalState.ChallengeInputValue = string.Empty;
+            ResetScore();
+            Dispatcher.Dispatch(new GetAlphabetAction());
         }
 
         private void UpdateChallengeText()
         {
-            // TODO: TryDequeue. If empty, display final score. Reset will requeue alphabet
-            var dequeue = AlphabetState.Value.AlphabetQueue.Dequeue();
-            _challengeLocalState.ChallengeText = dequeue.Russian;
-            _challengeLocalState.ChallengeInputValue = string.Empty;
+            var canDequeue = AlphabetState.Value.AlphabetQueue.TryDequeue(out var item);
+            if (!canDequeue)
+            {
+                CalculateResults();
+                return;
+            }
+            ChallengeLocalState.ChallengeText = item.Russian;
+            ChallengeLocalState.ChallengeInputValue = string.Empty;
+        }
+
+        private void CalculateResults()
+        {
+            ChallengeLocalState.Verdict = null;
+            ChallengeLocalState.Message = $"Challenge Completed. Correct: '{ChallengeLocalState.Score["Correct"]}' Incorrect: '{ChallengeLocalState.Score["Incorrect"]}'";
+            ChallengeLocalState.ChallengeInputValue = string.Empty;
+            ChallengeLocalState.IsChallengeInProgress = false;
+            ChallengeLocalState.IsGoDisabled = true;
+            ChallengeLocalState.IsNextDisabled = true;
+            ResetScore();
+        }
+
+        private void ResetScore()
+        {
+            ChallengeLocalState.Score["Correct"] = 0;
+            ChallengeLocalState.Score["Incorrect"] = 0;
         }
     }
 }

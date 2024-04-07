@@ -10,5 +10,6 @@ namespace UI.State.Phrase
         }
 
         public List<Shared.Dtos.Phrase> Phrases { get; set; } = [];
+        public Queue<Shared.Dtos.Phrase> PhraseQueue { get; set; } = new();
     }
 }

@@ -1,7 +1,14 @@
-﻿namespace UI.State.Alphabet.Local
+﻿using Fluxor;
+
+namespace UI.State.Phrase
 {
-    public class ChallengeLocalState
+    [FeatureState]
+    public record PhraseChallengeState
     {
+        public PhraseChallengeState()
+        {
+        }
+
         public string ChallengeText { get; set; }
         public string ChallengeInputValue { get; set; }
         public bool? Verdict { get; set; }

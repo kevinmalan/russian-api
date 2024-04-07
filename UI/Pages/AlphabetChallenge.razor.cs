@@ -18,8 +18,6 @@ namespace UI.Pages
         [Inject]
         private ChallengeLocalState ChallengeLocalState { get; set; }
 
-
-
         protected override async Task OnInitializedAsync()
         {
             if (AlphabetState.Value.Alphabet.Count == 0)

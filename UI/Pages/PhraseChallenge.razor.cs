@@ -28,9 +28,16 @@ namespace UI.Pages
 
                 PhraseState.StateChanged += HandlePhraseStateChanged;
             }
+            else if (!PhraseChallengeState.Value.IsChallengeInProgress)
+            {
+                BuildChallenge();
+            }
         }
 
         private void HandlePhraseStateChanged(object sender, object e)
+            => BuildChallenge();
+
+        private void BuildChallenge()
         {
             UpdateChallengeText();
             StateHasChanged();

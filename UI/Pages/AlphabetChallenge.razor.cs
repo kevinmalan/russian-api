@@ -25,16 +25,17 @@ namespace UI.Pages
                 Dispatcher.Dispatch(new GetAlphabetAction());
 
                 AlphabetState.StateChanged += HandleAlphabetStateChanged;
-                return;
             }
-
-            if (string.IsNullOrWhiteSpace(ChallengeLocalState.ChallengeText))
+            else if (!ChallengeLocalState.IsChallengeInProgress)
             {
-                UpdateChallengeText();
+                BuildChallenge();
             }
         }
 
         private void HandleAlphabetStateChanged(object sender, object e)
+            => BuildChallenge();
+
+        private void BuildChallenge()
         {
             UpdateChallengeText();
             ChallengeLocalState.IsChallengeInProgress = true;
